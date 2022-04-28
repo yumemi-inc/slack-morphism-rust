@@ -3,7 +3,8 @@ use rsb_derive::Builder;
 use std::any::{Any, TypeId};
 use std::collections::HashMap;
 use std::fmt::Debug;
-use std::sync::{Arc, RwLock};
+use std::sync::Arc;
+use tokio::sync::RwLock;
 use tracing::*;
 
 type UserStatesMap = HashMap<TypeId, Box<dyn Any + Send + Sync + 'static>>;
@@ -45,8 +46,8 @@ where
         http::StatusCode::BAD_REQUEST
     }
 
-    pub fn with_user_state<T: Send + Sync + 'static>(self, state: T) -> Self {
-        self.user_state.write().unwrap().set_user_state(state);
+    pub async fn with_user_state<T: Send + Sync + 'static>(self, state: T) -> Self {
+        self.user_state.write().await.set_user_state(state);
         self
     }
 }
