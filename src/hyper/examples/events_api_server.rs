@@ -22,7 +22,7 @@ async fn test_push_events_function(
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     // Read state
     let current_state = {
-        let states = _states.read().unwrap();
+        let states = _states.read().await;
         println!("{:#?}", states.get_user_state::<UserStateExample>());
         println!("{:#?}", states.len());
         UserStateExample(states.get_user_state::<UserStateExample>().unwrap().0 + 1)
@@ -30,7 +30,7 @@ async fn test_push_events_function(
 
     // Write state
     {
-        let mut states = _states.write().unwrap();
+        let mut states = _states.write().await;
         states.set_user_state::<UserStateExample>(current_state);
         println!("{:#?}", states.get_user_state::<UserStateExample>());
     }
@@ -118,7 +118,8 @@ async fn test_server() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let listener_environment = Arc::new(
         SlackClientEventsListenerEnvironment::new(client.clone())
             .with_error_handler(test_error_handler)
-            .with_user_state(UserStateExample(0)),
+            .with_user_state(UserStateExample(0))
+            .await,
     );
 
     let make_svc = make_service_fn(move |_| {
