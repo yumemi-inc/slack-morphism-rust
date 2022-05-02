@@ -46,6 +46,8 @@ pub struct SlackMessage {
     pub origin: SlackMessageOrigin,
     #[serde(flatten)]
     pub content: SlackMessageContent,
+    #[serde(flatten)]
+    pub sender: SlackMessageSender,
 }
 
 #[skip_serializing_none]
