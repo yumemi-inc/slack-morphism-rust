@@ -6,7 +6,8 @@ use futures::future::BoxFuture;
 use slack_morphism_models::events::{SlackCommandEvent, SlackCommandEventResponse};
 use slack_morphism_models::socket_mode::SlackSocketModeHelloEvent;
 use std::future::Future;
-use std::sync::{Arc, RwLock};
+use std::sync::Arc;
+use tokio::sync::RwLock;
 use tracing::*;
 
 pub trait SlackSocketModeListenerCallback<SCHC, RQ, RS>

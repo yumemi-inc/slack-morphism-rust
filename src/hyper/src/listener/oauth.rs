@@ -11,7 +11,8 @@ use hyper::body::*;
 use hyper::client::connect::Connect;
 use hyper::{Method, Request, Response};
 use std::future::Future;
-use std::sync::{Arc, RwLock};
+use std::sync::Arc;
+use tokio::sync::RwLock;
 use tracing::*;
 
 impl<H: 'static + Send + Sync + Connect + Clone> SlackClientEventsHyperListener<H> {

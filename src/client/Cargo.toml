@@ -1,6 +1,6 @@
 [package]
 name = "slack-morphism"
-version = "0.33.0"
+version = "0.32.0"
 authors = ["Abdulla Abdurakhmanov <me@abdolence.dev>"]
 edition = "2021"
 license = "Apache-2.0"
@@ -22,7 +22,7 @@ name = "slack_morphism"
 path = "src/lib.rs"
 
 [dependencies]
-slack-morphism-models = { path = "../models", version = "^0.33.0"}
+slack-morphism-models = { path = "../models", version = "^0.32.0"}
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 serde_with = "1.12"
@@ -37,7 +37,8 @@ tracing = "0.1"
 ring = "0.16"
 lazy_static = "1.4"
 http = "0.2"
-async-trait = "0.1.52"
+async-trait = "0.1"
+tokio = { version = "1.18", features = ["sync"] }
 
 
 [dev-dependencies]
