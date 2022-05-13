@@ -118,8 +118,7 @@ async fn test_server() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let listener_environment = Arc::new(
         SlackClientEventsListenerEnvironment::new(client.clone())
             .with_error_handler(test_error_handler)
-            .with_user_state(UserStateExample(0))
-            .await,
+            .with_user_state(UserStateExample(0)),
     );
 
     let make_svc = make_service_fn(move |_| {
