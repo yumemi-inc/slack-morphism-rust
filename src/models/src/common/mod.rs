@@ -119,6 +119,12 @@ pub struct SlackClientId(pub String);
 pub struct SlackClientSecret(pub String);
 
 #[derive(Debug, Eq, PartialEq, Hash, Clone, Serialize, Deserialize, ValueStruct)]
+pub struct SlackVerificationToken(pub String);
+
+#[derive(Debug, Eq, PartialEq, Hash, Clone, Serialize, Deserialize, ValueStruct)]
+pub struct SlackSigningSecret(pub String);
+
+#[derive(Debug, Eq, PartialEq, Hash, Clone, Serialize, Deserialize, ValueStruct)]
 pub struct EmailAddress(pub String);
 
 #[skip_serializing_none]
@@ -179,4 +185,12 @@ impl SlackEmoji {
     pub const SMILE: &'static str = ":smile:";
     pub const SPEECH_BALLOON: &'static str = ":speech_balloon:";
     pub const HEAVY_CHECK_MARK: &'static str = ":heavy_check_mark:";
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize, Clone)]
+pub enum SlackShortcutType {
+    #[serde(rename = "message")]
+    Message,
+    #[serde(rename = "global")]
+    Global,
 }
