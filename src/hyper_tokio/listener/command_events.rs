@@ -13,6 +13,7 @@ use hyper::{Method, Request, Response, StatusCode};
 use std::collections::HashMap;
 use std::future::Future;
 use std::sync::Arc;
+use tracing::error;
 
 impl<H: 'static + Send + Sync + Connect + Clone> SlackClientEventsHyperListener<H> {
     pub fn command_events_service_fn<'a, D, F, R>(
@@ -139,6 +140,8 @@ impl<H: 'static + Send + Sync + Connect + Clone> SlackClientEventsHyperListener<
                                         }
                                     }
                                     Err(command_event_err) => {
+                                        error!("{}", command_event_err);
+
                                         let status_code = thread_error_handler(
                                             command_event_err,
                                             sc,
